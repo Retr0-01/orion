@@ -1,0 +1,4 @@
+# Orion - A Discord Bot
+Orion is a multipurpose Discord bot a created for personal use, with the intention of making it public. But due to me wanting to work on something better and also having to focus on my studies, the project became stale and eventually, abandoned.<br>
+Therefore, one year later, I have decided to make it public for those who might want to check out my first ever code written or for the possibility of anyone wanting to take over the project.<br>
+As seen, the repository was originally setup at GitLab with production deployment configuration ready. The features of the bot vary, from database support to even the most basic commands. Some stuff are finished, some need polishing, some are not even started.
