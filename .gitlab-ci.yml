@@ -1,0 +1,53 @@
+# Note: the runner's configured builds directory is /srv/bots
+# meaning that for example $CI_BUILDS_DIR/orion refers to /srv/bots/orion
+
+# Create a pipeline only if the branch the commit was pushed is main.
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+# Define our stages.
+stages:
+    - logs
+    - test
+    - build
+
+# First job, delete our previous log files.
+clear-logs:
+    stage: logs
+    script:
+    - echo Deleting the previous log files...
+    - sudo rm -v -f $CI_BUILDS_DIR/orion/logs/*
+    variables:
+        GIT_STRATEGY: none
+    tags:
+    - bots
+
+# Second job, run ESLint and check if everything is ok.
+# This is also the job where our bot is being deployed.
+eslint:
+    stage: test
+    script:
+    - echo Running ESLint...
+    - npm run lint
+    variables:
+        GIT_CLONE_PATH: $CI_BUILDS_DIR/orion
+        GIT_CLEAN_FLAGS: none
+    tags:
+    - bots
+
+# Third job, rebuild the bot and reload it only if the package-lock file was changed.
+# This is useful for when pushing a hotfix or something that doesn't need a new build.
+dependencies:
+    stage: build
+    script:
+    - cd /srv/bots/orion
+    - sudo chmod 744 build.sh
+    - sudo ./build.sh
+    rules:
+    - changes:
+        - package-lock.json
+    variables:
+        GIT_STRATEGY: none
+    tags:
+    - bots

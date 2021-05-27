@@ -1,0 +1,41 @@
+{
+    "prefix": "o/",
+    "cooldown": "1",
+
+    "token": "",
+    "devs": [""],
+
+    "database":
+    {
+        "host": "",
+        "username": "",
+        "password": "",
+        "dbToConnect": "",
+        "options": ""
+    },
+
+    "webhooks":
+    {
+        "guildLog":
+        {
+            "id": "",
+            "token": ""
+        },
+        "devLog":
+        {
+            "id": "",
+            "token": ""
+        }
+    },
+
+    "apiKeys":
+    {
+        "youtube": ""
+    },
+
+    "botStatus":
+    {
+        "activity": "",
+        "activityType": ""
+    }
+}
